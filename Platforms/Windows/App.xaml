@@ -1,0 +1,8 @@
+﻿<maui:MauiWinUIApplication
+    x:Class="Monsters_Inc_bezorgerApp.WinUI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:maui="using:Microsoft.Maui"
+    xmlns:local="using:Monsters_Inc_bezorgerApp.WinUI">
+
+</maui:MauiWinUIApplication>
