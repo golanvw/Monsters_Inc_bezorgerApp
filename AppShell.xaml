@@ -7,7 +7,7 @@
     Title="Monsters_Inc_bezorgerApp">
 
     <ShellContent
-        Title="Home"
+        Title="Login"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
