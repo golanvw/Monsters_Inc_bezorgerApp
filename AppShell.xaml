@@ -6,9 +6,21 @@
     xmlns:local="clr-namespace:Monsters_Inc_bezorgerApp"
     Title="Monsters_Inc_bezorgerApp">
 
-    <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="All Orders"
+            ContentTemplate="{DataTemplate local:AllOrders}"
+            Route="AllOrders" />
+
+        <ShellContent
+            Title="In Progress"
+            ContentTemplate="{DataTemplate local:InProgressOrdersPage}"
+            Route="InProgressOrdersPage" />
+
+        <ShellContent
+            Title="Finished"
+            ContentTemplate="{DataTemplate local:FinishedOrdersPage}"
+            Route="FinishedOrdersPage" />
+    </TabBar>
 
 </Shell>
