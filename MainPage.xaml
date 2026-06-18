@@ -45,6 +45,13 @@
                 HorizontalOptions="Fill" />
 
             <Button
+                x:Name="LoginWithKeyPass"
+                Text="Login met Keypass"
+                SemanticProperties.Hint="Knop om met keypass in te loggen"
+                Clicked="LoginWithKeyPassClicked"
+                HorizontalOptions="Fill" />
+
+            <Button
                 x:Name="ForgotPswdButton"
                 Text="Wachtwoord vergeten?"
                 SemanticProperties.Hint="Knop om wachtwoord te herstellen"

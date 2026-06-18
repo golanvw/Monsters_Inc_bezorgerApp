@@ -2,9 +2,74 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Monsters_Inc_bezorgerApp.AllOrders"
-             Title="All Orders">
-    <VerticalStackLayout Padding="24" Spacing="12">
-        <Label Text="All Orders" FontSize="24" HorizontalOptions="Center" />
-        <Label Text="Overzicht van alle bezorgingen." HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Overzicht">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Header Section -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Goedemiddag, ..." FontSize="28" FontAttributes="Bold" />
+                <Label Text="Route: Heerlen, Hoensbroek" FontSize="16" />
+                <Label Text="Aantal pakketten: 124" FontSize="16" />
+                <Label Text="Aantal stops: 96" FontSize="16" />
+            </VerticalStackLayout>
+
+            <!-- Stats Grid -->
+            <Grid Padding="0, 10, 0, 10" ColumnDefinitions="*, *" RowDefinitions="Auto, Auto" ColumnSpacing="15" RowSpacing="20">
+
+                <!-- Te bezorgen -->
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="5">
+                    <Label Text="Te bezorgen" FontSize="16" FontAttributes="Bold" />
+                    <Border Stroke="{AppThemeBinding Light=Black, Dark=White}" StrokeThickness="2" Padding="10, 5" HeightRequest="50">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <Label Text="124" FontSize="24" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Bezorgd -->
+                <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
+                    <Label Text="Bezorgd" FontSize="16" FontAttributes="Bold" />
+                    <Border Stroke="{AppThemeBinding Light=Black, Dark=White}" StrokeThickness="2" Padding="10, 5" HeightRequest="50">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <Label Text="0" FontSize="24" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Overig -->
+                <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="5">
+                    <Label Text="Overig" FontSize="16" FontAttributes="Bold" />
+                    <Border Stroke="{AppThemeBinding Light=Black, Dark=White}" StrokeThickness="2" Padding="10, 5" HeightRequest="50">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <Label Text="0" FontSize="24" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Verwachte eindtijd -->
+                <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="5">
+                    <Label Text="Verwachte eindtijd" FontSize="16" FontAttributes="Bold" />
+                    <Border Stroke="{AppThemeBinding Light=Black, Dark=White}" StrokeThickness="2" Padding="10, 5" HeightRequest="50">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5" />
+                        </Border.StrokeShape>
+                        <Label Text="14:36" FontSize="24" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                    </Border>
+                </VerticalStackLayout>
+
+            </Grid>
+
+            <!-- Actions Section -->
+            <VerticalStackLayout Spacing="15" Margin="0, 20, 0, 0">
+                <Button Text="Bekijk Stops" FontSize="18" FontAttributes="Bold" HeightRequest="55" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1F1F1F}" TextColor="{AppThemeBinding Light=Black, Dark=White}" BorderColor="{AppThemeBinding Light=Black, Dark=White}" BorderWidth="2" />
+                <Button Text="Bekijk route" FontSize="18" FontAttributes="Bold" HeightRequest="55" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1F1F1F}" TextColor="{AppThemeBinding Light=Black, Dark=White}" BorderColor="{AppThemeBinding Light=Black, Dark=White}" BorderWidth="2" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>
