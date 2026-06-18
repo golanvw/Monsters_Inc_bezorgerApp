@@ -30,4 +30,9 @@ public partial class LoginPage : ContentPage
 	{
 		DisplayAlert("Wachtwoord vergeten", "Neem contact op met de beheerder om je wachtwoord te resetten.", "OK");
     }
+
+    private void LoginWithKeyPassClicked(object sender, EventArgs e)
+    {
+		DisplayAlert("Inloggen met KeyPass", "Deze functie is nog niet beschikbaar.", "OK");
+    }
 }

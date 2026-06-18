@@ -8,18 +8,21 @@
 
     <TabBar>
         <ShellContent
-            Title="All Orders"
+            Title="Route"
             ContentTemplate="{DataTemplate local:AllOrders}"
+            Icon="location.png"
             Route="AllOrders" />
 
         <ShellContent
-            Title="In Progress"
+            Title="Home"
             ContentTemplate="{DataTemplate local:InProgressOrdersPage}"
+            Icon="home.png"
             Route="InProgressOrdersPage" />
 
         <ShellContent
-            Title="Finished"
+            Title="Paketten"
             ContentTemplate="{DataTemplate local:FinishedOrdersPage}"
+            Icon="box.png"
             Route="FinishedOrdersPage" />
     </TabBar>
 
