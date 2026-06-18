@@ -64,4 +64,16 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="AllOrders.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="InProgressOrdersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FinishedOrdersPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

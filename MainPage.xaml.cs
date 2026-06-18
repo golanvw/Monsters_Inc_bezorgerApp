@@ -1,21 +1,20 @@
 ﻿namespace Monsters_Inc_bezorgerApp;
 
-public partial class MainPage : ContentPage
+public partial class LoginPage : ContentPage
 {
-	int count = 0;
-
-	public MainPage()
+	public LoginPage()
 	{
 		InitializeComponent();
 		ErrorLabel.IsVisible = false;
     }
 
-	private void OnLoginClicked(object? sender, EventArgs e)
+	private async void OnLoginClicked(object? sender, EventArgs e)
 	{
 		if(UsernameInput.Text == "admin" && PasswordInput.Text == "admin")
 		{
 			ErrorLabel.IsVisible = false;
-            DisplayAlert("Login Gelukt", "Je bent ingelogd!", "OK");
+            await DisplayAlert("Login Gelukt", "Je bent ingelogd!", "OK");
+			Application.Current!.Windows[0].Page = new AppShell();
         }
 		else
 		{
