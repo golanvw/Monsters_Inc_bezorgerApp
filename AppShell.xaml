@@ -9,21 +9,21 @@
     <TabBar>
         <ShellContent
             Title="Route"
-            ContentTemplate="{DataTemplate local:AllOrders}"
+            ContentTemplate="{DataTemplate local:RoutePage}"
             Icon="location.png"
-            Route="AllOrders" />
+            Route="RoutePage" />
 
         <ShellContent
             Title="Home"
-            ContentTemplate="{DataTemplate local:InProgressOrdersPage}"
+            ContentTemplate="{DataTemplate local:HomePage}"
             Icon="home.png"
-            Route="InProgressOrdersPage" />
+            Route="HomePage" />
 
         <ShellContent
-            Title="Paketten"
-            ContentTemplate="{DataTemplate local:FinishedOrdersPage}"
+            Title="Stops"
+            ContentTemplate="{DataTemplate local:StopsPage}"
             Icon="box.png"
-            Route="FinishedOrdersPage" />
+            Route="StopsPage" />
     </TabBar>
 
 </Shell>

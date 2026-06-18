@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Monsters_Inc_bezorgerApp.AllOrders"
+             x:Class="Monsters_Inc_bezorgerApp.HomePage"
              Title="Overzicht">
 
     <ScrollView>
@@ -65,8 +65,8 @@
 
             <!-- Actions Section -->
             <VerticalStackLayout Spacing="15" Margin="0, 20, 0, 0">
-                <Button Text="Bekijk Stops" FontSize="18" FontAttributes="Bold" HeightRequest="55" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1F1F1F}" TextColor="{AppThemeBinding Light=Black, Dark=White}" BorderColor="{AppThemeBinding Light=Black, Dark=White}" BorderWidth="2" />
-                <Button Text="Bekijk route" FontSize="18" FontAttributes="Bold" HeightRequest="55" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1F1F1F}" TextColor="{AppThemeBinding Light=Black, Dark=White}" BorderColor="{AppThemeBinding Light=Black, Dark=White}" BorderWidth="2" />
+                <Button Text="Bekijk Stops" FontSize="18" FontAttributes="Bold" HeightRequest="55" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1F1F1F}" TextColor="{AppThemeBinding Light=Black, Dark=White}" BorderColor="{AppThemeBinding Light=Black, Dark=White}" BorderWidth="2" Clicked="RouteButtonClicked" />
+                <Button Text="Bekijk route" FontSize="18" FontAttributes="Bold" HeightRequest="55" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1F1F1F}" TextColor="{AppThemeBinding Light=Black, Dark=White}" BorderColor="{AppThemeBinding Light=Black, Dark=White}" BorderWidth="2" Clicked="RouteButtonClicked"/>
             </VerticalStackLayout>
 
         </VerticalStackLayout>

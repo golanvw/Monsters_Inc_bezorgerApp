@@ -1,8 +1,8 @@
 namespace Monsters_Inc_bezorgerApp;
 
-public partial class AllOrders : ContentPage
+public partial class StopsPage : ContentPage
 {
-	public AllOrders()
+	public StopsPage()
 	{
 		InitializeComponent();
     }

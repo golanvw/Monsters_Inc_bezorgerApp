@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Monsters_Inc_bezorgerApp.StopsPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="16,16,16,20"
+          RowSpacing="14">
+        <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Start">
+            <Border HeightRequest="38"
+                    WidthRequest="38"
+                    Stroke="#2B2B2B"
+                    StrokeThickness="1.5"
+                    BackgroundColor="Black"
+                    StrokeShape="RoundRectangle 10"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center">
+                <Label Text="&lt;"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="White"
+                       Margin="0,-2,0,0" />
+            </Border>
+
+            <Label Grid.Column="1"
+                   Text=""
+                   HorizontalOptions="Center" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="18">
+                <Grid RowDefinitions="Auto,Auto,Auto"
+                          ColumnDefinitions="*,Auto"
+                          RowSpacing="16">
+                    <Label Text="Order nummer: 24679PBE"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#FFFDF9" />
+
+                    <Border Grid.Column="1"
+                                Stroke="#2B2B2B"
+                                StrokeThickness="1"
+                                BackgroundColor="#2B2B2B"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="10,6"
+                                HorizontalOptions="End">
+                        <Label Text="Stop 1/6"
+                                   FontSize="12"
+                                   FontAttributes="Bold"
+                                   TextColor="#FFFDF9" />
+                    </Border>
+
+                    <VerticalStackLayout Grid.Row="1"
+                                             Grid.ColumnSpan="2"
+                                             Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="2">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Pakket 1:"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#FFFDF9" />
+                                <Label Text="249348"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#FFFDF9" />
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="1"
+                                       Text="Status : in afwachting"
+                                       FontSize="14"
+                                       TextColor="#FFFDF9"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Start" />
+                        </Grid>
+
+                        <BoxView HeightRequest="1" Color="#2B2B2B" Opacity="0.35" />
+
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="2">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Pakket 2:"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#FFFDF9" />
+                                <Label Text="437682"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#FFFDF9" />
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="1"
+                                       Text="Status : in afwachting"
+                                       FontSize="14"
+                                       TextColor="#FFFDF9"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Start" />
+                        </Grid>
+                    </VerticalStackLayout>
+
+                    <BoxView Grid.Row="2"
+                                 Grid.ColumnSpan="2"
+                                 HeightRequest="1"
+                                 Color="#2B2B2B"
+                                 Opacity="0.12" />
+                </Grid>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="14">
+            <Border Stroke="#2B2B2B"
+                    StrokeThickness="1.5"
+                    BackgroundColor="#2B2B2B"
+                    StrokeShape="RoundRectangle 4"
+                    Scale="0.75"
+                    Padding="12,16">
+                <Label Text="Bekijk route"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFFDF9"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+            </Border>
+
+            <Border Stroke="#2B2B2B"
+                    StrokeThickness="1.5"
+                    BackgroundColor="#2B2B2B"
+                    StrokeShape="RoundRectangle 4"
+                    Scale="0.75"
+                    Padding="12,16">
+                <Label Text="Scan pakket"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFFDF9"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+            </Border>
+
+            <Border Stroke="#2B2B2B"
+                    StrokeThickness="1.5"
+                    BackgroundColor="#2B2B2B"
+                    StrokeShape="RoundRectangle 4"
+                    Scale="0.75"
+                    
+                    Padding="12,16">
+                <Label Text="Volgende stop"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#FFFDF9"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
