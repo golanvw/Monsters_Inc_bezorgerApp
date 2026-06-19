@@ -9,6 +9,6 @@ public partial class HomePage : ContentPage
 
     private void RouteButtonClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new RoutePage());  
+        Navigation.PushAsync(new StopsPage());  
     }
 }

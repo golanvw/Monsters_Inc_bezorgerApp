@@ -20,7 +20,7 @@
             Route="HomePage" />
 
         <ShellContent
-            Title="Stops"
+            Title="Pakketten inscannen"
             ContentTemplate="{DataTemplate local:StopsPage}"
             Icon="box.png"
             Route="StopsPage" />

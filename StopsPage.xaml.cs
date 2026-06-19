@@ -6,4 +6,9 @@ public partial class StopsPage : ContentPage
 	{
 		InitializeComponent();
     }
+
+	private void OnStopTapped(object sender, TappedEventArgs e)
+	{
+		Navigation.PushAsync(new DetailsStopsPage());
+	}
 }

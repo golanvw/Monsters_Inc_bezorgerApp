@@ -68,6 +68,9 @@
 	  <Compile Update="StopsPage.xaml.cs">
 	    <DependentUpon>StopsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="DetailsStopsPage.xaml.cs">
+	    <DependentUpon>DetailsStopsPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Homepage.xaml.cs">
 	    <DependentUpon>Homepage.xaml</DependentUpon>
 	  </Compile>
@@ -84,6 +87,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="StopsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="DetailsStopsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
