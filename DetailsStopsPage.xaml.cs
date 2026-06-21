@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using ZXing.Net.Maui.Controls;
 
 namespace Monsters_Inc_bezorgerApp;
 
@@ -18,14 +20,20 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 		InitializeComponent();
 		packages = new ObservableCollection<StopPackage>
 		{
-			new StopPackage("Pakket 1:", "249348", "in afwachting"),
+			new StopPackage("Pakket 1:", "8724934865376", "in afwachting"),
 			new StopPackage("Pakket 2:", "437682", "in afwachting")
 		};
 		SelectedPackage = packages[0];
 		BindingContext = this;
-	}
+        cameraBarcodeReaderView.Options = new ZXing.Net.Maui.BarcodeReaderOptions
+        {
+            Formats = ZXing.Net.Maui.BarcodeFormat.Ean13, 
+            AutoRotate = true
+        };
 
-	public string OrderNumberDisplay => "Order nummer: 24679PBE";
+    }
+
+    public string OrderNumberDisplay => "Order nummer: 24679PBE";
 
 	public string StopBadgeText => "Stop 1/6";
 
@@ -116,7 +124,14 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 	private void OnScanTapped(object sender, TappedEventArgs e)
 	{
 		ApplySelectionFromPackage();
-		ScanPopupOverlay.IsVisible = true;
+		if (selectedPackage.StatusDisplay == "Status : bezorgd")
+		{
+			DisplayAlert("Fout", "dit pakket is al bezorgd", "ok");
+		}
+		else
+		{
+			ScanPopupOverlay2.IsVisible = true;
+		}
 	}
 
 	private void OnPackageTapped(object sender, TappedEventArgs e)
@@ -201,7 +216,32 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 		}
 	}
 
-	public new event PropertyChangedEventHandler? PropertyChanged;
+    protected void BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
+    {
+        var first = e.Results?.FirstOrDefault();
+        if (first is null)
+        {
+            return;
+        }
+
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            if (first.Value == selectedPackage.PackageNumber)
+            {
+                ScanPopupOverlay2.IsVisible = false;
+                Debug.WriteLine("dit wordt gedaan");
+                ScanPopupOverlay.IsVisible = true;
+            }
+            else
+            {
+                await DisplayAlert("Fout", "Verkeerde code", "OK");
+            }
+        });
+    }
+
+
+
+    public new event PropertyChangedEventHandler? PropertyChanged;
 
 	private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
 	{
@@ -254,7 +294,7 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 			}
 		}
 
-		public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 	}
 
 }
