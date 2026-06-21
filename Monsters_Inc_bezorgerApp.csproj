@@ -66,8 +66,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AllOrders.xaml">
+	  <Compile Update="StopsPage.xaml.cs">
+	    <DependentUpon>StopsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="DetailsStopsPage.xaml.cs">
+	    <DependentUpon>DetailsStopsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Homepage.xaml.cs">
+	    <DependentUpon>Homepage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="RoutePage.xaml.cs">
+	    <DependentUpon>RoutePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Homepage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="RoutePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="StopsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="DeliveryScannerPage.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -75,7 +96,7 @@
 	  <MauiXaml Update="InProgressOrdersPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="FinishedOrdersPage.xaml">
+	  <MauiXaml Update="DetailsStopsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="WarehouseScannerPage.xaml">

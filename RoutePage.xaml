@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Monsters_Inc_bezorgerApp.RoutePage"
+             Title="Route">
+    <VerticalStackLayout Padding="24" Spacing="12">
+        <Label Text="Route" FontSize="24" HorizontalOptions="Center" />
+        <Label Text="Hieronder zie je de routebeschrijving." HorizontalOptions="Center" />
+        
+        <Image Source="route_map.png" Aspect="AspectFit" HorizontalOptions="Center" />
+        
+    </VerticalStackLayout>
+</ContentPage>
