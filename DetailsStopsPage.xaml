@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Monsters_Inc_bezorgerApp.DetailsStopsPage"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#1F1F1F">
 
@@ -256,6 +257,40 @@
                             HeightRequest="42" />
                 </VerticalStackLayout>
             </Border>
+            
+        </Grid>
+        <Grid x:Name="ScanPopupOverlay2"
+              Grid.RowSpan="3"
+              IsVisible="False"
+              BackgroundColor="#AA000000"
+              Padding="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1"
+                BackgroundColor="#F5F1EA"
+                Stroke="#1F1F1F"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10"
+                Padding="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="320">
+                <zxing:CameraBarcodeReaderView
+                    x:Name="cameraBarcodeReaderView"
+                    IsDetecting="True"
+                    BarcodesDetected="BarcodesDetected" />
+            </Border>
+            <Button
+                x:Name="CancelScanBtn"
+                Text="Annuleer inscannen"
+                Clicked="CancelScanBtn_Clicked"
+                Grid.Row="2"
+                WidthRequest="320"
+                HeightRequest="20"
+                Margin="0,0,0,185"/>
         </Grid>
     </Grid>
 </ContentPage>
