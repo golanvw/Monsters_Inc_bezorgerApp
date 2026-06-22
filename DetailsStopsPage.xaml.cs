@@ -21,7 +21,7 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 		packages = new ObservableCollection<StopPackage>
 		{
 			new StopPackage("Pakket 1:", "8724934865376", "in afwachting"),
-			new StopPackage("Pakket 2:", "437682", "in afwachting")
+			new StopPackage("Pakket 2:", "8743768229710", "in afwachting")
 		};
 		SelectedPackage = packages[0];
 		BindingContext = this;
@@ -124,14 +124,7 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 	private void OnScanTapped(object sender, TappedEventArgs e)
 	{
 		ApplySelectionFromPackage();
-		if (selectedPackage.StatusDisplay == "Status : bezorgd")
-		{
-			DisplayAlert("Fout", "dit pakket is al bezorgd", "ok");
-		}
-		else
-		{
-			ScanPopupOverlay2.IsVisible = true;
-		}
+		ScanPopupOverlay2.IsVisible = true;
 	}
 
 	private void OnPackageTapped(object sender, TappedEventArgs e)
@@ -297,4 +290,8 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
 	}
 
+    private void CancelScanBtn_Clicked(object sender, EventArgs e)
+    {
+		ScanPopupOverlay2.IsVisible = false;
+    }
 }

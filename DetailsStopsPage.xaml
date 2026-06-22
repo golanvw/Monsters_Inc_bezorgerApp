@@ -283,6 +283,14 @@
                     IsDetecting="True"
                     BarcodesDetected="BarcodesDetected" />
             </Border>
+            <Button
+                x:Name="CancelScanBtn"
+                Text="Annuleer inscannen"
+                Clicked="CancelScanBtn_Clicked"
+                Grid.Row="2"
+                WidthRequest="320"
+                HeightRequest="20"
+                Margin="0,0,0,185"/>
         </Grid>
     </Grid>
 </ContentPage>
