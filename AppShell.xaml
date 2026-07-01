@@ -8,16 +8,16 @@
 
     <TabBar>
         <ShellContent
-            Title="Route"
-            ContentTemplate="{DataTemplate local:RoutePage}"
-            Icon="location.png"
-            Route="RoutePage" />
-
-        <ShellContent
             Title="Home"
             ContentTemplate="{DataTemplate local:HomePage}"
             Icon="home.png"
             Route="HomePage" />
+
+         <ShellContent
+            Title="Route"
+            ContentTemplate="{DataTemplate local:RoutePage}"
+            Icon="location.png"
+            Route="RoutePage" />
 
         <ShellContent
             Title="Pakketten inscannen"

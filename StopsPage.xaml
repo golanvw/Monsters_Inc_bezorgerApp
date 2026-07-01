@@ -1,156 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.Maui.Controls"
              x:Class="Monsters_Inc_bezorgerApp.StopsPage"
+             x:Name="RootPage"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="Black">
 
-    <Grid RowDefinitions="Auto,*,Auto"
-          Padding="0" >
+    <Grid RowDefinitions="Auto,*,Auto" Padding="0">
 
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="14,6,14,12"
-                                 Spacing="0">
+        <VerticalStackLayout Grid.Row="0" Padding="14,14,14,8" Spacing="6">
+            <Label Text="Pakketten in bus laden" FontSize="22" FontAttributes="Bold" TextColor="#9B7FDB" />
+            <Label x:Name="VanProgressLabel" Text="0/3 pakketten in bus" FontSize="15" FontAttributes="Bold" TextColor="#FFFDF8" />
+        </VerticalStackLayout>
 
-                <Border Stroke="#FFFDF8"
-                        StrokeThickness="1.5"
-                        
-                        Padding="14"
-                        StrokeShape="RoundRectangle 6">
+        <CollectionView x:Name="PackagesListView" Grid.Row="1" Margin="14,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="#333333" StrokeThickness="1" BackgroundColor="#1C1C1E" StrokeShape="RoundRectangle 6" Margin="0,0,0,8" Padding="12,10">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label Text="{Binding Code}" TextColor="#FFFDF8" FontSize="16" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding StatusText}" TextColor="{Binding StatusColor}" FontAttributes="Bold" FontSize="14" VerticalOptions="Center"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Grid.Row="2" Padding="14,10,14,14" Spacing="10">
+
+            <VerticalStackLayout IsVisible="{Binding IsContinueButtonVisible, Source={x:Reference RootPage}}" Spacing="10">
+                <Label Text="Klaar om te bezorgen:" FontSize="16" FontAttributes="Bold" TextColor="#9B7FDB" Margin="0,0,0,4"/>
+
+                <Border Stroke="#2B2B2B" StrokeThickness="1.5" BackgroundColor="#2B2B2B" StrokeShape="RoundRectangle 8" Padding="0,16">
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnStopTapped" />
+                        <TapGestureRecognizer Tapped="OnStop1Tapped" />
                     </Border.GestureRecognizers>
-                    <Grid ColumnDefinitions="58,*,Auto"
-                          ColumnSpacing="14">
-                        <Border HeightRequest="58"
-                                WidthRequest="58"
-                                Stroke="#FFFDF8"
-                                StrokeThickness="1.5"
-                               
-                                StrokeShape="Ellipse"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center">
-                            <Grid>
-                                <Border HeightRequest="58"
-                                     WidthRequest="58"
-                                     Stroke="#FFFDF8"
-                                     StrokeThickness="1.5"
-        
-                                     StrokeShape="Ellipse"
-                                     HorizontalOptions="Center"
-                                     VerticalOptions="Center">
-                                  <Label Text="01"
-                                        FontSize="18"
-                                        FontAttributes="Bold"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                                        TextColor="#FFFDF8" />
-                                </Border>
-                            </Grid>
-                        </Border>
-
-                        <VerticalStackLayout Grid.Column="1"
-                                             Spacing="4"
-                                             VerticalOptions="Center">
-                            <Label Text="6414 van Appelstreitweg 37"
-                                   FontSize="15"
-                                   FontAttributes="Bold"
-                                   TextColor="#FFFDF8" />
-                            <Label Text="Aantal pakketten: 2"
-                                   FontSize="14"
-                                   FontAttributes="Bold"
-                                   TextColor="#FFFDF8" />
-                            <Label Text="746299BE"
-                                   FontSize="15"
-                                   FontAttributes="Bold"
-                                   TextColor="#FFFDF8" />
-                        </VerticalStackLayout>
-                    </Grid>
+                    <Label Text="Start bezorging (Stop 1)" FontSize="18" FontAttributes="Bold" TextColor="#FFFDF8" HorizontalOptions="Center" />
                 </Border>
-
-                <BoxView HeightRequest="1"
-                         Margin="0,0,0,0"
-                         Color="#FFFDF8" />
-
-                <Grid Padding="0,22,0,22"
-                      ColumnDefinitions="58,*"
-                      ColumnSpacing="14">
-                    <Border HeightRequest="58"
-                            WidthRequest="58"
-                            Stroke="#FFFDF8"
-                            StrokeThickness="1.5"
-                           
-                            StrokeShape="Ellipse"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
-                        <Label Text="02"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               TextColor="#FFFDF8" />
-                    </Border>
-
-                    <VerticalStackLayout Grid.Column="1"
-                                         Spacing="4"
-                                         VerticalOptions="Center">
-                        <Label Text="8312 Kernkraftweg 56"
-                               FontSize="15"
-                               FontAttributes="Bold"
-                               TextColor="#FFFDF8" />
-                        <Label Text="Aantal pakketten 5"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               TextColor="#FFFDF8" />
-                        <Label Text="837461CD"
-                               FontSize="15"
-                               FontAttributes="Bold"
-                               TextColor="#FFFDF8" />
-                    </VerticalStackLayout>
-                </Grid>
-
-                <BoxView HeightRequest="1" Color="#FFFDF8" />
-
-                <Grid Padding="0,22,0,22"
-                      ColumnDefinitions="58,*"
-                      ColumnSpacing="14">
-                    <Border HeightRequest="58"
-                            WidthRequest="58"
-                            Stroke="#FFFDF8"
-                            StrokeThickness="1.5"
-                           
-                            StrokeShape="Ellipse"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center">
-                        <Label Text="03"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               TextColor="#FFFDF8" />
-                    </Border>
-
-                    <VerticalStackLayout Grid.Column="1"
-                                         Spacing="4"
-                                         VerticalOptions="Center">
-                        <Label Text="5089 Marketstraat 12"
-                               FontSize="15"
-                               FontAttributes="Bold"
-                               TextColor="#FFFDF8" />
-                        <Label Text="Aantal pakketten 3"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               TextColor="#FFFDF8" />
-                        <Label Text="952837FB"
-                               FontSize="15"
-                               FontAttributes="Bold"
-                               TextColor="#FFFDF8" />
-                    </VerticalStackLayout>
-                </Grid>
-
-                <BoxView HeightRequest="1" Color="#FFFDF8" />
             </VerticalStackLayout>
-        </ScrollView>
+
+            <Border Stroke="#2B2B2B" StrokeThickness="1.5" BackgroundColor="#2B2B2B" StrokeShape="RoundRectangle 8" Padding="12,16"
+                    IsVisible="{Binding IsScanButtonVisible, Source={x:Reference RootPage}}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnScanVanTapped" />
+                </Border.GestureRecognizers>
+                <Label Text="Scan pakket in bus" FontSize="18" FontAttributes="Bold" TextColor="#FFFDF8" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+            </Border>
+        </VerticalStackLayout>
+
+        <Grid x:Name="ScanPopupOverlay" Grid.RowSpan="3" IsVisible="False" BackgroundColor="#AA000000" Padding="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1" BackgroundColor="#F5F1EA" Stroke="#1F1F1F" StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="18" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320">
+                <zxing:CameraBarcodeReaderView x:Name="cameraBarcodeReaderView" IsDetecting="True" BarcodesDetected="BarcodesDetected" />
+            </Border>
+            <Button x:Name="CancelScanBtn" Text="Annuleer inscannen" Clicked="CancelScanBtn_Clicked" Grid.Row="2" WidthRequest="320" HeightRequest="20" Margin="0,0,0,185" />
+        </Grid>
 
     </Grid>
 </ContentPage>
