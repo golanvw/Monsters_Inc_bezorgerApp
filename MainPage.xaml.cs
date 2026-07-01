@@ -14,7 +14,7 @@ public partial class LoginPage : ContentPage
 		{
 			ErrorLabel.IsVisible = false;
             await DisplayAlert("Login Gelukt", "Je bent ingelogd!", "OK");
-			Application.Current!.Windows[0].Page = new AppShell();
+			Application.Current!.Windows[0].Page = new HomePage();
         }
 		else
 		{

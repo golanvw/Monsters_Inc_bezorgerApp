@@ -233,6 +233,18 @@
                                      IsChecked="{Binding IsOtherSelected, Mode=TwoWay}"
                                      CheckedChanged="OnStatusSelectionChanged"
                                      TextColor="#1F1F1F" />
+                        <VerticalStackLayout IsVisible="{Binding IsOtherSelected}"
+                     Spacing="10"
+                     Margin="18,0,0,0">
+                            <RadioButton Content="bij buren bezorgd"
+                 GroupName="SubPackageStatus" IsChecked="{Binding IsDeliveredToNeighboursSelected, Mode=TwoWay}"
+                 CheckedChanged="OnStatusSelectionChanged"
+                 TextColor="#1F1F1F" />
+                            <RadioButton Content="pakket ontvanger niet thuis"
+                 GroupName="SubPackageStatus" IsChecked="{Binding IsRecipientNotHomeSelected, Mode=TwoWay}"
+                 CheckedChanged="OnStatusSelectionChanged"
+                 TextColor="#1F1F1F" />
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
 
                     <Border IsVisible="{Binding IsOtherSelected}"

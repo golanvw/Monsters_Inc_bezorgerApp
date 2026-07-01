@@ -12,6 +12,8 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 	private StopPackage? selectedPackage;
 	private bool isAwaitingSelected;
 	private bool isDeliveredSelected;
+	private bool isDeliveredToNeighboursSelected;
+	private bool isRecipientNotHomeSelected;
 	private bool isOtherSelected;
 	private string statusNotes = string.Empty;
 
@@ -91,6 +93,36 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 		}
 	}
 
+	public bool IsDeliveredToNeighboursSelected
+	{
+		get => isDeliveredToNeighboursSelected;
+		set
+		{
+			if (isDeliveredToNeighboursSelected == value)
+			{
+				return;
+			}
+
+			isDeliveredToNeighboursSelected = value;
+			OnPropertyChanged();
+		}
+	}
+
+	public bool IsRecipientNotHomeSelected
+	{
+		get => isRecipientNotHomeSelected;
+		set
+		{
+			if (isRecipientNotHomeSelected == value)
+			{
+				return;
+			}
+
+			isRecipientNotHomeSelected = value;
+			OnPropertyChanged();
+		}
+	}
+
 	public bool IsOtherSelected
 	{
 		get => isOtherSelected;
@@ -143,41 +175,64 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 		}
 	}
 
-	private void OnStatusSelectionChanged(object sender, CheckedChangedEventArgs e)
-	{
-		if (!e.Value)
-		{
-			return;
-		}
+    private void OnStatusSelectionChanged(object sender, CheckedChangedEventArgs e)
+    {
+        if (!e.Value)
+        {
+            return;
+        }
 
-		if (sender is RadioButton radioButton)
-		{
-			IsOtherSelected = string.Equals(radioButton.Content?.ToString(), "Overig", StringComparison.OrdinalIgnoreCase);
-			if (IsOtherSelected)
-			{
-				StatusNotes = string.Empty;
-			}
-		}
-	}
+        if (sender is RadioButton radioButton)
+        {
+  
+            if (radioButton.GroupName == "SubPackageStatus")
+            {
+                return;
+            }
 
-	private async void OnSaveStatusClicked(object sender, EventArgs e)
-	{
-		if (SelectedPackage is not null)
-		{
-			SelectedPackage.StatusDisplay = IsDeliveredSelected
-				? "Status : bezorgd"
-				: IsOtherSelected
-					? $"Status : {StatusNotes}".TrimEnd()
-					: "Status : in afwachting";
+            var content = radioButton.Content?.ToString();
+            IsOtherSelected = string.Equals(content, "Overig", StringComparison.OrdinalIgnoreCase);
 
-			OnPropertyChanged(nameof(PopupPackageDisplay));
-		}
+            if (IsOtherSelected)
+            {
+                StatusNotes = string.Empty;
+            }
+        }
+    }
 
-		ScanPopupOverlay.IsVisible = false;
-		await Task.CompletedTask;
-	}
+    private async void OnSaveStatusClicked(object sender, EventArgs e)
+    {
+        if (SelectedPackage is not null)
+        {
+            if (IsDeliveredSelected)
+            {
+                SelectedPackage.StatusDisplay = "Status : bezorgd";
+            }
+            else if (IsAwaitingSelected)
+            {
+                SelectedPackage.StatusDisplay = "Status : in afwachting";
+            }
+            else if (IsOtherSelected)
+            {
+    
+                string overigStatus = IsDeliveredToNeighboursSelected
+                    ? "bij buren bezorgd"
+                    : IsRecipientNotHomeSelected
+                        ? "pakket ontvanger niet thuis"
+                        : StatusNotes;
 
-	private async void OnRouteTapped(object sender, TappedEventArgs e)
+                SelectedPackage.StatusDisplay = $"Status : {overigStatus}".TrimEnd();
+            }
+
+            OnPropertyChanged(nameof(PopupPackageDisplay));
+            OnPropertyChanged(nameof(SelectedPackage));
+        }
+
+        ScanPopupOverlay.IsVisible = false;
+        await Task.CompletedTask;
+    }
+
+    private async void OnRouteTapped(object sender, TappedEventArgs e)
 	{
 		await Navigation.PushAsync(new RoutePage());
 	}
@@ -193,8 +248,16 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
 			return;
 		}
 
-		IsAwaitingSelected = SelectedPackage.StatusDisplay.Contains("afwachting", StringComparison.OrdinalIgnoreCase);
-		IsDeliveredSelected = SelectedPackage.StatusDisplay.Contains("bezorgd", StringComparison.OrdinalIgnoreCase);
+        if (!IsOtherSelected)
+        {
+            IsDeliveredToNeighboursSelected = false;
+            IsRecipientNotHomeSelected = false;
+            StatusNotes = string.Empty;
+        }
+
+        var status = SelectedPackage.StatusDisplay;
+		IsAwaitingSelected = status.Contains("afwachting", StringComparison.OrdinalIgnoreCase);
+		IsDeliveredSelected = status.Contains("bezorgd", StringComparison.OrdinalIgnoreCase);
 		IsOtherSelected = !IsAwaitingSelected && !IsDeliveredSelected;
 		StatusNotes = IsOtherSelected
 			? SelectedPackage.StatusDisplay.Replace("Status :", string.Empty).Trim()

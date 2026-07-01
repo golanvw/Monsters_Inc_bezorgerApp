@@ -8,10 +8,10 @@
         <VerticalStackLayout Padding="20" Spacing="20">
             <!-- Header Section -->
             <VerticalStackLayout Spacing="5">
-                <Label Text="Goedemiddag, ..." FontSize="28" FontAttributes="Bold" />
+                <Label Text="Goedemiddag Bezorger!" FontSize="28" FontAttributes="Bold" />
                 <Label Text="Route: Heerlen, Hoensbroek" FontSize="16" />
-                <Label Text="Aantal pakketten: 124" FontSize="16" />
-                <Label Text="Aantal stops: 96" FontSize="16" />
+                <Label Text="Aantal pakketten: 3" FontSize="16" />
+                <Label Text="Aantal stops: 3" FontSize="16" />
             </VerticalStackLayout>
 
             <!-- Stats Grid -->
@@ -24,7 +24,7 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="5" />
                         </Border.StrokeShape>
-                        <Label Text="124" FontSize="24" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
+                        <Label Text="3" FontSize="24" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -49,6 +49,7 @@
                         <Label Text="0" FontSize="24" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
                     </Border>
                 </VerticalStackLayout>
+               
 
                 <!-- Verwachte eindtijd -->
                 <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="5">
@@ -63,13 +64,36 @@
 
             </Grid>
 
+            <!-- Bus Informatie Section -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Voertuig Informatie" FontSize="20" FontAttributes="Bold" />
+                <Border Stroke="{AppThemeBinding Light=Black, Dark=White}" StrokeThickness="2" Padding="15">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Spacing="8">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Voertuig:" FontSize="16" FontAttributes="Bold" WidthRequest="100" />
+                            <Label Text="Mercedes Sprinter (V-123-AB)" FontSize="16" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Locatie:" FontSize="16" FontAttributes="Bold" WidthRequest="100" />
+                            <Label Text="Laaddock 4, Sector B" FontSize="16" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="Status:" FontSize="16" FontAttributes="Bold" WidthRequest="100" />
+                            <Label Text="Nog niet ingeladen" FontSize="16" TextColor="{AppThemeBinding Light=Red, Dark=Red}" FontAttributes="Bold"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
             <!-- Actions Section -->
-            <VerticalStackLayout Spacing="15" Margin="0, 20, 0, 0">
+            <VerticalStackLayout Spacing="15" Margin="0, 10, 0, 0">
                 <Button Text="Bekijk Stops" FontSize="18" FontAttributes="Bold" HeightRequest="55" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1F1F1F}" TextColor="{AppThemeBinding Light=Black, Dark=White}" BorderColor="{AppThemeBinding Light=Black, Dark=White}" BorderWidth="2" Clicked="RouteButtonClicked" />
                 <Button Text="Bekijk route" FontSize="18" FontAttributes="Bold" HeightRequest="55" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=White, Dark=#1F1F1F}" TextColor="{AppThemeBinding Light=Black, Dark=White}" BorderColor="{AppThemeBinding Light=Black, Dark=White}" BorderWidth="2" Clicked="RouteButtonClicked"/>
             </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
