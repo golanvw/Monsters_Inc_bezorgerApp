@@ -7,23 +7,27 @@
     Title="Monsters_Inc_bezorgerApp">
 
     <TabBar>
-        <ShellContent
-            Title="Route"
-            ContentTemplate="{DataTemplate local:RoutePage}"
-            Icon="location.png"
-            Route="RoutePage" />
-
-        <ShellContent
-            Title="Home"
+        <!-- Tab 1: Home -->
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent
             ContentTemplate="{DataTemplate local:HomePage}"
-            Icon="home.png"
             Route="HomePage" />
+        </Tab>
 
-        <ShellContent
-            Title="Pakketten inscannen"
+        <!-- Tab 2: Route -->
+        <Tab Title="Route" Icon="location.png">
+            <ShellContent
+            ContentTemplate="{DataTemplate local:RoutePage}"
+            Route="RoutePage" />
+        </Tab>
+
+        <!-- Tab 3: Pakketten inscannen -->
+        <Tab Title="Pakketten inscannen" Icon="box.png">
+            <ShellContent
             ContentTemplate="{DataTemplate local:StopsPage}"
-            Icon="box.png"
             Route="StopsPage" />
+        </Tab>
     </TabBar>
+
 
 </Shell>
