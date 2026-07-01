@@ -118,17 +118,20 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
         }
     }
 
-    public DetailsPackageWrapper? ScannedPackage
-    {
-        get => scannedPackage;
-        set
-        {
-            if (scannedPackage == value) return;
-            scannedPackage = value;
-            OnPropertyChangedCustom();
-            OnPropertyChangedCustom(nameof(PopupPackageDisplay));
-        }
-    }
+	public bool IsOtherSelected
+	{
+		get => isOtherSelected;
+		set
+		{
+			if (isOtherSelected == value)
+			{
+				return;
+			}
+
+			isOtherSelected = value;
+			OnPropertyChanged();
+		}
+	}
 
     public string CustomFailureReason
     {
@@ -156,24 +159,71 @@ public partial class DetailsStopsPage : ContentPage, INotifyPropertyChanged
         }
     }
 
-    private void OnPackageSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection.FirstOrDefault() is DetailsPackageWrapper package)
-        {
-            SelectedDisplayPackage = package;
-        }
-    }
+	private void OnPackageSelectionChanged(object sender, SelectionChangedEventArgs e)
+	{
+		if (e.CurrentSelection.FirstOrDefault() is StopPackage package)
+		{
+			SelectedPackage = package;
+		}
+	}
 
-    private async void OnRouteTapped(object sender, TappedEventArgs e)
-    {
-        await Navigation.PushAsync(new RoutePage());
-    }
+	private void OnStatusSelectionChanged(object sender, CheckedChangedEventArgs e)
+	{
+		if (!e.Value)
+		{
+			return;
+		}
 
-    // STAP 2: Knop uitschakelen en een melding tonen dat de rit klaar is
-    private async void OnNextStopTapped(object sender, TappedEventArgs e)
-    {
-        await DisplayAlert("Rit voltooid", "Er zijn geen volgende stops meer. Dit was de laatste stop!", "OK");
-    }
+		if (sender is RadioButton radioButton)
+		{
+			IsOtherSelected = string.Equals(radioButton.Content?.ToString(), "Overig", StringComparison.OrdinalIgnoreCase);
+			if (IsOtherSelected)
+			{
+				StatusNotes = string.Empty;
+			}
+		}
+	}
+
+	private async void OnSaveStatusClicked(object sender, EventArgs e)
+	{
+		if (SelectedPackage is not null)
+		{
+			SelectedPackage.StatusDisplay = IsDeliveredSelected
+				? "Status : bezorgd"
+				: IsOtherSelected
+					? $"Status : {StatusNotes}".TrimEnd()
+					: "Status : in afwachting";
+
+			OnPropertyChanged(nameof(PopupPackageDisplay));
+		}
+
+		ScanPopupOverlay.IsVisible = false;
+		await Task.CompletedTask;
+	}
+
+	private async void OnRouteTapped(object sender, TappedEventArgs e)
+	{
+		await Navigation.PushAsync(new RoutePage());
+	}
+
+	private void ApplySelectionFromPackage()
+	{
+		if (SelectedPackage is null)
+		{
+			IsAwaitingSelected = true;
+			IsDeliveredSelected = false;
+			IsOtherSelected = false;
+			StatusNotes = string.Empty;
+			return;
+		}
+
+		IsAwaitingSelected = SelectedPackage.StatusDisplay.Contains("afwachting", StringComparison.OrdinalIgnoreCase);
+		IsDeliveredSelected = SelectedPackage.StatusDisplay.Contains("bezorgd", StringComparison.OrdinalIgnoreCase);
+		IsOtherSelected = !IsAwaitingSelected && !IsDeliveredSelected;
+		StatusNotes = IsOtherSelected
+			? SelectedPackage.StatusDisplay.Replace("Status :", string.Empty).Trim()
+			: string.Empty;
+	}
 
     private void UpdatePackageSelectionStates()
     {
