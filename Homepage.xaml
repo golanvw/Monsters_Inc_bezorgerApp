@@ -49,6 +49,8 @@
                         <Label Text="0" FontSize="24" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
                     </Border>
                 </VerticalStackLayout>
+               
+
 
 
                 <!-- Verwachte eindtijd -->

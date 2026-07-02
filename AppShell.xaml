@@ -16,14 +16,15 @@
          <ShellContent
             Title="Route"
             ContentTemplate="{DataTemplate local:RoutePage}"
-            Icon="location.png"
             Route="RoutePage" />
+        </Tab>
 
         <ShellContent
             Title="Pakketten inscannen"
             ContentTemplate="{DataTemplate local:StopsPage}"
-            Icon="box.png"
             Route="StopsPage" />
+        </Tab>
     </TabBar>
+
 
 </Shell>
