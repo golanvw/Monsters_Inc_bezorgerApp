@@ -6,124 +6,73 @@
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="#1F1F1F">
 
-    <Grid RowDefinitions="Auto,*,Auto"
-          BackgroundColor="#1F1F1F">
+    <Grid RowDefinitions="Auto,*,Auto" BackgroundColor="#1F1F1F">
 
-        <VerticalStackLayout Padding="20,20,20,16"
-                             Spacing="16">
-            <Label Text="Stops"
-                   FontSize="32"
-                   FontAttributes="Bold"
-                   TextColor="#9B7FDB" />
+        <VerticalStackLayout Padding="20,20,20,16" Spacing="16">
+            <Label Text="Stops" FontSize="32" FontAttributes="Bold" TextColor="#9B7FDB" />
 
-            <Grid ColumnDefinitions="Auto,*"
-                  ColumnSpacing="12"
-                  VerticalOptions="Start">
-                <Border HeightRequest="36"
-                        WidthRequest="36"
-                        Stroke="#FFFDF8"
-                        StrokeThickness="1.5"
-                        BackgroundColor="#2B2B2B"
-                        StrokeShape="RoundRectangle 8"
-                        HorizontalOptions="Start"
-                        VerticalOptions="Center">
-                    <Label Text="&lt;"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           TextColor="#FFFDF8" />
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" VerticalOptions="Start">
+                <Border HeightRequest="36" WidthRequest="36" Stroke="#FFFDF8" StrokeThickness="1.5" BackgroundColor="#2B2B2B" StrokeShape="RoundRectangle 8" HorizontalOptions="Start" VerticalOptions="Center">
+                    <Label Text="&lt;" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#FFFDF8" />
                 </Border>
             </Grid>
         </VerticalStackLayout>
 
         <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="20,16,20,16"
-                                 Spacing="16">
-                <Grid ColumnDefinitions="*,Auto"
-                      ColumnSpacing="12">
-                    <Label Text="{Binding OrderNumberDisplay}"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="#FFFDF8"
-                           VerticalOptions="Center" />
-
-                    <Border Stroke="#2B2B2B"
-                            StrokeThickness="1"
-                            BackgroundColor="#2B2B2B"
-                            Padding="10,6"
-                            StrokeShape="RoundRectangle 8"
-                            HorizontalOptions="End">
-                        <Label Text="{Binding StopBadgeText}"
-                               FontSize="12"
-                               FontAttributes="Bold"
-                               TextColor="#FFFDF8" />
+            <VerticalStackLayout Padding="20,16,20,16" Spacing="16">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <Label Text="{Binding OrderNumberDisplay}" FontSize="18" FontAttributes="Bold" TextColor="#FFFDF8" VerticalOptions="Center" />
+                    <Border Stroke="#2B2B2B" StrokeThickness="1" BackgroundColor="#2B2B2B" Padding="10,6" StrokeShape="RoundRectangle 8" HorizontalOptions="End">
+                        <Label Text="{Binding StopBadgeText}" FontSize="12" FontAttributes="Bold" TextColor="#FFFDF8" />
                     </Border>
                 </Grid>
 
-                <CollectionView ItemsSource="{Binding Packages}"
-                                SelectionMode="Single"
-                                SelectedItem="{Binding SelectedPackage, Mode=TwoWay}"
-                                SelectionChanged="OnPackageSelectionChanged">
+                <CollectionView ItemsSource="{Binding DisplayPackages}" SelectionMode="Single" SelectedItem="{Binding SelectedDisplayPackage, Mode=TwoWay}" SelectionChanged="OnPackageSelectionChanged">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Border Stroke="#2B2B2B"
-                                    StrokeThickness="1.5"
-                                    BackgroundColor="#2B2B2B"
-                                    StrokeShape="RoundRectangle 10"
-                                    Padding="12"
-                                    Margin="0,0,0,2">
+                            <Border Stroke="#2B2B2B" StrokeThickness="1.5" BackgroundColor="#2B2B2B" StrokeShape="RoundRectangle 10" Padding="12" Margin="0,0,0,2">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnPackageTapped" />
                                 </Border.GestureRecognizers>
-
                                 <Border.Triggers>
-                                    <DataTrigger TargetType="Border"
-                                                 Binding="{Binding IsSelected}"
-                                                 Value="True">
+                                    <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
                                         <Setter Property="BackgroundColor" Value="#F5F1EA" />
                                         <Setter Property="Stroke" Value="#9B7FDB" />
                                     </DataTrigger>
+                                    <DataTrigger TargetType="Border" Binding="{Binding IsDelivered}" Value="True">
+                                        <Setter Property="Stroke" Value="#2E7D32" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Border" Binding="{Binding IsFailed}" Value="True">
+                                        <Setter Property="Stroke" Value="#C62828" />
+                                    </DataTrigger>
                                 </Border.Triggers>
-
-                                <Grid ColumnDefinitions="*,Auto"
-                                      RowDefinitions="Auto,Auto"
-                                      RowSpacing="2">
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="2">
                                     <VerticalStackLayout Spacing="2">
-                                        <Label Text="{Binding Title}"
-                                               FontSize="16"
-                                               FontAttributes="Bold">
+                                        <Label Text="{Binding TitleDisplay}" FontSize="16" FontAttributes="Bold">
                                             <Label.Triggers>
-                                                <DataTrigger TargetType="Label"
-                                                             Binding="{Binding IsSelected}"
-                                                             Value="True">
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
                                                     <Setter Property="TextColor" Value="#1F1F1F" />
                                                 </DataTrigger>
                                             </Label.Triggers>
                                         </Label>
-                                        <Label Text="{Binding PackageNumber}"
-                                               FontSize="16"
-                                               FontAttributes="Bold">
+                                        <Label Text="{Binding CodeDisplay}" FontSize="14" TextColor="#AAAAAA">
                                             <Label.Triggers>
-                                                <DataTrigger TargetType="Label"
-                                                             Binding="{Binding IsSelected}"
-                                                             Value="True">
-                                                    <Setter Property="TextColor" Value="#1F1F1F" />
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="TextColor" Value="#555555" />
                                                 </DataTrigger>
                                             </Label.Triggers>
                                         </Label>
                                     </VerticalStackLayout>
-
-                                    <Label Grid.Column="1"
-                                           Text="{Binding StatusDisplay}"
-                                           FontSize="14"
-                                           HorizontalOptions="End"
-                                           VerticalOptions="Start">
+                                    <Label Grid.Column="1" Text="{Binding StatusDisplay}" FontSize="14" HorizontalOptions="End" VerticalOptions="Start">
                                         <Label.Triggers>
-                                            <DataTrigger TargetType="Label"
-                                                         Binding="{Binding IsSelected}"
-                                                         Value="True">
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
                                                 <Setter Property="TextColor" Value="#1F1F1F" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsDelivered}" Value="True">
+                                                <Setter Property="TextColor" Value="#2E7D32" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsFailed}" Value="True">
+                                                <Setter Property="TextColor" Value="#C62828" />
                                             </DataTrigger>
                                         </Label.Triggers>
                                     </Label>
@@ -135,162 +84,107 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <VerticalStackLayout Grid.Row="2"
-                             Padding="20,14,20,14"
-                             Spacing="12">
-            <Border Stroke="#2B2B2B"
-                    StrokeThickness="1.5"
-                    BackgroundColor="#2B2B2B"
-                    StrokeShape="RoundRectangle 8"
-                    Padding="12,16">
+        <VerticalStackLayout Grid.Row="2" Padding="20,14,20,14" Spacing="12">
+            <Border Stroke="#2B2B2B" StrokeThickness="1.5" BackgroundColor="#2B2B2B" StrokeShape="RoundRectangle 8" Padding="12,16">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnRouteTapped" />
                 </Border.GestureRecognizers>
-                <Label Text="Bekijk route"
-                       FontSize="18"
-                       FontAttributes="Bold"
-                       TextColor="#FFFDF8"
-                       HorizontalOptions="Center"
-                       HorizontalTextAlignment="Center" />
+                <Label Text="Bekijk route" FontSize="18" FontAttributes="Bold" TextColor="#FFFDF8" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
             </Border>
 
-            <Border x:Name="ScanButton"
-                    Stroke="#2B2B2B"
-                    StrokeThickness="1.5"
-                    BackgroundColor="#2B2B2B"
-                    StrokeShape="RoundRectangle 8"
-                    Padding="12,16">
+            <Border x:Name="ScanButton" Stroke="#2B2B2B" StrokeThickness="1.5" BackgroundColor="#2B2B2B" StrokeShape="RoundRectangle 8" Padding="12,16">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnScanTapped" />
                 </Border.GestureRecognizers>
-                <Label Text="Scan pakket"
-                       FontSize="18"
-                       FontAttributes="Bold"
-                       TextColor="#FFFDF8"
-                       HorizontalOptions="Center"
-                       HorizontalTextAlignment="Center" />
+                <Label Text="Scan pakket" FontSize="18" FontAttributes="Bold" TextColor="#FFFDF8" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
             </Border>
 
-            <Border Stroke="#2B2B2B"
-                    StrokeThickness="1.5"
-                    BackgroundColor="#2B2B2B"
-                    StrokeShape="RoundRectangle 8"
-                    Padding="12,16">
-                <Label Text="Volgende stop"
-                       FontSize="18"
-                       FontAttributes="Bold"
-                       TextColor="#FFFDF8"
-                       HorizontalOptions="Center"
-                       HorizontalTextAlignment="Center" />
+            <Border Stroke="#2B2B2B" StrokeThickness="1.5" BackgroundColor="#2B2B2B" StrokeShape="RoundRectangle 8" Padding="12,16">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnNextStopTapped" />
+                </Border.GestureRecognizers>
+                <Label Text="Volgende stop" FontSize="18" FontAttributes="Bold" TextColor="#FFFDF8" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
             </Border>
         </VerticalStackLayout>
 
-        <Grid x:Name="ScanPopupOverlay"
-              Grid.RowSpan="3"
-              IsVisible="False"
-              BackgroundColor="#AA000000"
-              Padding="24">
+        <Grid x:Name="ScanResultOverlay" Grid.RowSpan="3" IsVisible="False" BackgroundColor="#AA000000" Padding="24">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <Border Grid.Row="1"
-                    BackgroundColor="#F5F1EA"
-                    Stroke="#1F1F1F"
-                    StrokeThickness="2"
-                    StrokeShape="RoundRectangle 10"
-                    Padding="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="320">
-                <VerticalStackLayout Spacing="16">
+            <Border Grid.Row="1" BackgroundColor="#F5F1EA" Stroke="#1F1F1F" StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="18" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320">
+                <VerticalStackLayout Spacing="20">
                     <VerticalStackLayout Spacing="4">
-                        <Label Text="{Binding PopupPackageDisplay}"
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               TextColor="#1F1F1F" />
-                        <Label Text="Status:"
-                               FontSize="16"
-                               FontAttributes="Bold"
-                               TextColor="#1F1F1F" />
+                        <Label Text="{Binding PopupPackageDisplay}" FontSize="18" FontAttributes="Bold" TextColor="#1F1F1F" HorizontalTextAlignment="Center" />
+                        <Label Text="Bezorgd?" FontSize="16" FontAttributes="Bold" TextColor="#1F1F1F" HorizontalTextAlignment="Center" />
                     </VerticalStackLayout>
-
-                    <VerticalStackLayout Spacing="10">
-                        <RadioButton Content="In afwachting"
-                                     GroupName="PackageStatus"
-                                     IsChecked="{Binding IsAwaitingSelected, Mode=TwoWay}"
-                                     CheckedChanged="OnStatusSelectionChanged"
-                                     TextColor="#1F1F1F" />
-                        <RadioButton Content="Bezorgd"
-                                     GroupName="PackageStatus"
-                                     IsChecked="{Binding IsDeliveredSelected, Mode=TwoWay}"
-                                     CheckedChanged="OnStatusSelectionChanged"
-                                     TextColor="#1F1F1F" />
-                        <RadioButton Content="Overig"
-                                     GroupName="PackageStatus"
-                                     IsChecked="{Binding IsOtherSelected, Mode=TwoWay}"
-                                     CheckedChanged="OnStatusSelectionChanged"
-                                     TextColor="#1F1F1F" />
-                    </VerticalStackLayout>
-
-                    <Border IsVisible="{Binding IsOtherSelected}"
-                            Stroke="#1F1F1F"
-                            StrokeThickness="1.5"
-                            BackgroundColor="#FFFFFF"
-                            StrokeShape="RoundRectangle 6"
-                            Padding="10"
-                            HeightRequest="96">
-                        <Editor Text="{Binding StatusNotes, Mode=TwoWay}"
-                                BackgroundColor="Transparent"
-                                TextColor="#1F1F1F"
-                                Placeholder="Opmerking"
-                                AutoSize="TextChanges" />
-                    </Border>
-
-                    <Button Text="Opslaan"
-                            Clicked="OnSaveStatusClicked"
-                            BackgroundColor="#2B2B2B"
-                            TextColor="#FFFDF8"
-                            CornerRadius="6"
-                            HeightRequest="42" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+                        <Border BackgroundColor="#E8F5E9" Stroke="#2E7D32" StrokeThickness="2" StrokeShape="RoundRectangle 12" Padding="16,20">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnDeliveredTapped" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="6" HorizontalOptions="Center">
+                                <Label Text="👍" FontSize="42" HorizontalTextAlignment="Center" />
+                                <Label Text="Bezorgd" FontSize="16" FontAttributes="Bold" TextColor="#2E7D32" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" BackgroundColor="#FFEBEE" Stroke="#C62828" StrokeThickness="2" StrokeShape="RoundRectangle 12" Padding="16,20">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnNotDeliveredTapped" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="6" HorizontalOptions="Center">
+                                <Label Text="👎" FontSize="42" HorizontalTextAlignment="Center" />
+                                <Label Text="Niet bezorgd" FontSize="16" FontAttributes="Bold" TextColor="#C62828" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
                 </VerticalStackLayout>
             </Border>
-            
         </Grid>
-        <Grid x:Name="ScanPopupOverlay2"
-              Grid.RowSpan="3"
-              IsVisible="False"
-              BackgroundColor="#AA000000"
-              Padding="24">
+
+        <Grid x:Name="FailureReasonOverlay" Grid.RowSpan="3" IsVisible="False" BackgroundColor="#AA000000" Padding="24">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Border Grid.Row="1"
-                BackgroundColor="#F5F1EA"
-                Stroke="#1F1F1F"
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 10"
-                Padding="18"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="320">
-                <zxing:CameraBarcodeReaderView
-                    x:Name="cameraBarcodeReaderView"
-                    IsDetecting="True"
-                    BarcodesDetected="BarcodesDetected" />
+            <Border Grid.Row="1" BackgroundColor="#F5F1EA" Stroke="#1F1F1F" StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="18" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Waarom niet bezorgd?" FontSize="18" FontAttributes="Bold" TextColor="#1F1F1F" />
+                    <Label Text="Meest gekozen" FontSize="14" FontAttributes="Bold" TextColor="#666666" />
+                    <CollectionView x:Name="FailureReasonsList" SelectionMode="Single" SelectionChanged="OnFailureReasonSelected" HeightRequest="180">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="#1F1F1F" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 6" Padding="12,10" Margin="0,0,0,8">
+                                    <Label Text="{Binding .}" FontSize="15" TextColor="#1F1F1F" />
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Label Text="Anders" FontSize="14" FontAttributes="Bold" TextColor="#666666" />
+                    <Border Stroke="#1F1F1F" StrokeThickness="1.5" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 6" Padding="10" HeightRequest="80">
+                        <Editor Text="{Binding CustomFailureReason, Mode=TwoWay}" BackgroundColor="Transparent" TextColor="#1F1F1F" Placeholder="Andere reden..." AutoSize="TextChanges" />
+                    </Border>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Annuleer" Clicked="OnCancelFailureReasonClicked" BackgroundColor="#2B2B2B" TextColor="#FFFDF8" CornerRadius="6" HeightRequest="42" />
+                        <Button Grid.Column="1" Text="Opslaan" Clicked="OnSaveCustomReasonClicked" BackgroundColor="#C62828" TextColor="#FFFDF8" CornerRadius="6" HeightRequest="42" />
+                    </Grid>
+                </VerticalStackLayout>
             </Border>
-            <Button
-                x:Name="CancelScanBtn"
-                Text="Annuleer inscannen"
-                Clicked="CancelScanBtn_Clicked"
-                Grid.Row="2"
-                WidthRequest="320"
-                HeightRequest="20"
-                Margin="0,0,0,185"/>
         </Grid>
+
+        <Grid x:Name="ScanPopupOverlay2" Grid.RowSpan="3" IsVisible="False" BackgroundColor="#AA000000" Padding="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1" BackgroundColor="#F5F1EA" Stroke="#1F1F1F" StrokeThickness="2" StrokeShape="RoundRectangle 10" Padding="18" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="320">
+                <zxing:CameraBarcodeReaderView x:Name="cameraBarcodeReaderView" IsDetecting="True" BarcodesDetected="BarcodesDetected" />
+            </Border>
+            <Button x:Name="CancelScanBtn" Text="Annuleer inscannen" Clicked="CancelScanBtn_Clicked" Grid.Row="2" WidthRequest="320" HeightRequest="20" Margin="0,0,0,185"/>
+        </Grid>
+
     </Grid>
 </ContentPage>
